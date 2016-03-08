@@ -39,6 +39,7 @@ public class BuyActivity extends YunsuActivity {
     private String productName;
     private String Text;//测试1
     private String Text2;//测试1
+    private String Text3;//测试1
 
 
 
