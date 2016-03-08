@@ -28,8 +28,7 @@ import java.util.Map;
  */
 public class BuyActivity extends YunsuActivity {
 
-    private TextView titleTVooooooooooooooooooooooo;
-    private TextView titleTVooooooooooooooo;
+
 
     private TextView titleTV;
     private TextView addbt;//增加商品
@@ -38,7 +37,7 @@ public class BuyActivity extends YunsuActivity {
     private TextView priceTV;//单价
     private TextView tolTV;//总价
     private String productName;
-    private String Text;//测试
+    private String Text;//测试1
 
 
     private Map<String,Double> pricemap;//可选价格
