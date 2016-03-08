@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white_f2"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true">
+
+    <include layout="@layout/top_title" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+        <RadioButton
+            style="@style/order_but"
+            android:text="@string/order1"/>
+        <RadioButton
+            style="@style/order_but"
+            android:text="@string/order2"/>
+        <RadioButton
+            style="@style/order_but"
+            android:text="@string/order3"/>
+        <RadioButton
+            style="@style/order_but"
+            android:text="@string/order4"/>
+        <RadioButton
+            style="@style/order_but"
+            android:text="@string/order5"/>
+    </RadioGroup>
+
+
+    <ListView
+        android:id="@+id/listview_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:divider="@color/white_f2"
+        android:dividerHeight="10dp"
+        android:scrollbars="none" />
+
+
+</LinearLayout>

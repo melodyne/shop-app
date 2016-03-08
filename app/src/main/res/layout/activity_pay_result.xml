@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:fitsSystemWindows="true"
+	android:clipToPadding="true">
+
+	<include layout="@layout/top_title"/>
+
+	<TextView
+		android:id="@+id/pay_result"
+		android:layout_width="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="80dp"
+		android:textSize="17sp"
+		android:textColor="@color/black"
+		android:layout_height="wrap_content" />
+
+	<Button
+		android:layout_width="match_parent"
+		android:layout_height="50dp"
+		android:background="@drawable/button_yuanjiao_blue"
+		android:layout_marginTop="100dp"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp"
+		android:onClick="doBack"
+		android:textColor="@color/white"
+		android:textSize="16sp"
+		android:text="返回继续购买"/>
+	
+</LinearLayout>

@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">云宿</string>
+    <string name="shangcheng">云宿商城</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="regis">注册</string>
+    <!-- 欢迎界面 -->
+    <string name="willcome">云宿欢迎你</string>
+    <string name="willcome2">因为梦想而美丽，因为坚持而动人...</string>
+    <string name="willcome_star">&#160;&#160;加入我们吧&#160;&#160;</string>
+
+    <!-- Strings related to login -->
+    <string name="phone">手机:</string>
+    <string name="xieyi">我已阅读用户使用协议</string>
+    <string name="input_user">用户名/手机</string>
+    <string name="input_password">密码</string>
+    <string name="login">登录</string>
+    <string name="login_regist">登录/注册</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_phone">请输入11位的手机号码！</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_input_empty">你还没输入</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="listfooterview_normal">查看更多</string>
+    <string name="listfooterview_ready">松开载入更多</string>
+    <string name="title_activity_product_details">ProductDetailsActivity</string>
+    <string name="title_activity_travel">TravelActivity</string>
+    <string name="data_loading">数据加载中……</string>
+    <string name="mycollect">我的收藏</string>
+
+    <string name="product_introduce">商品介绍</string>
+    <string name="product_parameter">规格参数</string>
+    <string name="product_instructions">购买须知</string>
+
+    <!-- 个人 -->
+    <string name="user_msg">我的信息</string>
+    <string name="user_oder">订单列表</string>
+    <string name="user_buycar">购物车</string>
+    <string name="user_about">关于我们</string>about
+    <string name="user_exit">退出</string>
+
+    <!-- TAB -->
+    <string name="tab1">首页</string>
+    <string name="tab2">收藏</string>
+    <string name="tab3">购物车</string>
+    <string name="tab4">我的</string>
+    <string name="Personal">个人中心</string>
+
+    <!-- 栏目 -->
+    <string name="menu1">乡村景点</string>
+    <string name="menu2">精品酒店</string>
+    <string name="menu3">特色美食</string>
+    <string name="menu4">乡土特产</string>
+    <string name="menu5">旅行社</string>
+
+    <!-- 订单 -->
+    <string name="order1">全部订单</string>
+    <string name="order2">精品名宿</string>
+    <string name="order3">特色美食</string>
+    <string name="order4">乡土特产</string>
+    <string name="order5">旅行社</string>
+    <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
+
+    <!-- 错误信息 -->
+    <string name="err_server">网络不可用&#160;或&#160;服务器跪了！</string>
+    <!-- 支付 -->
+    <string name="weixinpay">微信支付</string>
+    <string name="weixinad">亿万用户的选择，更快更安全</string>
+
+</resources>

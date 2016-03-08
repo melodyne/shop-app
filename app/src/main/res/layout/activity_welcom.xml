@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/mainRLayout"
+    android:background="#000000"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    >
+    <com.yunsu.chen.ui.MyScrollLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"    
+	  android:id="@+id/ScrollLayout"    
+	  android:layout_width="fill_parent"    
+	  android:layout_height="fill_parent"
+	  android:visibility="visible"
+	  >
+      <RelativeLayout  
+          android:background="@drawable/w01"
+	      android:layout_width="fill_parent"    
+	      android:layout_height="fill_parent"
+	  >
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:layout_centerHorizontal="true"
+              android:layout_marginBottom="215dp"
+              android:text="@string/willcome"
+              android:textColor="@color/white"
+              android:textSize="18sp" />
+      </RelativeLayout>
+      <RelativeLayout  
+          android:background="@drawable/w02"    
+	  	  android:layout_width="fill_parent"    
+	  	  android:layout_height="match_parent"
+	  	>
+          <TextView
+              android:id="@+id/t1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentTop="true"
+              android:layout_centerHorizontal="true"
+              android:layout_margin="310dp"
+              android:text="@string/willcome2"
+              android:gravity="center_horizontal"
+              android:textColor="@color/white"
+              android:textSize="18sp" />
+      </RelativeLayout>
+      <RelativeLayout  
+          android:background="@drawable/w03"    
+	      android:layout_width="fill_parent"    
+	      android:layout_height="fill_parent"
+	  />
+      <RelativeLayout  
+          android:background="@drawable/w04"    
+	      android:layout_width="fill_parent"    
+	      android:layout_height="fill_parent"
+	  />
+     
+      <RelativeLayout  
+          android:background="@drawable/w01"    
+	      android:layout_width="fill_parent"    
+	      android:layout_height="fill_parent">
+          <Button
+              android:id="@+id/startBtn"
+              android:layout_width="wrap_content"
+              android:layout_height="40dp"
+              android:layout_alignParentBottom="true"
+              android:layout_centerHorizontal="true"
+              android:layout_marginBottom="98dp"
+              android:text="@string/willcome_star"
+              android:textSize="18sp"
+              android:textColor="@color/white"
+              android:background="@drawable/button_bg"
+              android:layout_marginLeft="8dp"
+			  android:layout_marginRight="8dp"
+			  android:layout_gravity="center_vertical"
+              />
+      </RelativeLayout>
+    </com.yunsu.chen.ui.MyScrollLayout>
+    <LinearLayout 
+    	android:orientation="horizontal" 
+    	android:id="@+id/llayout" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:layout_marginBottom="50dip" 
+    	android:layout_alignParentBottom="true" 
+    	android:layout_centerHorizontal="true"
+    	android:visibility="visible">
+    	
+        <ImageView android:clickable="true"  android:padding="5.0dip" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
+        <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
+        <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
+        <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
+        <ImageView android:clickable="true"  android:padding="5.0dip"  android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/page_indicator_bg" />
+        
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/animLayout"
+        android:background="@drawable/open">
+        <LinearLayout
+            android:id="@+id/leftLayout" 
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        <ImageView 
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/whatsnew_left"/>
+        </LinearLayout>
+        <LinearLayout 
+            android:id="@+id/rightLayout" 
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        <ImageView 
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/whatsnew_right"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 定义shake的动画  先向上再向下 -->
+    <translate
+        android:duration="1000"
+        android:fromYDelta="0"
+        android:toYDelta="-40%" />
+    <translate
+        android:duration="1000"
+        android:fromYDelta="0"
+        android:toYDelta="40%"
+        android:fillAfter="true"
+        android:startOffset="1000"/>
+</set>

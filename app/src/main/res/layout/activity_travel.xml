@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true">
+
+    <include layout="@layout/top_title"/>
+
+        <com.yunsu.chen.listview.WaterDropListView
+            android:id="@+id/listview_travel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:divider="#00000000"
+            android:dividerHeight="10dp"
+            android:background="@color/white">
+        </com.yunsu.chen.listview.WaterDropListView>
+</LinearLayout>
