@@ -39,6 +39,8 @@ public class BuyActivity extends YunsuActivity {
     private String productName;
     private String Text;//测试1
 
+    ///jdhfgkjdhfjkgdhfgjkhdkfjghdkfhgkdjh
+
 
     private Map<String,Double> pricemap;//可选价格
 
