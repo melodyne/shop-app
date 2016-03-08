@@ -36,6 +36,8 @@ public class BuyActivity extends YunsuActivity {
     private TextView tolTV;//总价
     private String productName;
 
+    ///jdhfgkjdhfjkgdhfgjkhdkfjghdkfhgkdjh
+
 
     private Map<String,Double> pricemap;//可选价格
 
