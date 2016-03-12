@@ -74,14 +74,7 @@
             android:textColor="@color/yellow_f80"
             android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:gravity="center_vertical"
-            android:text="选择"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
+        <include layout="@layout/goods_num_selector"/>
 
     </LinearLayout>
 

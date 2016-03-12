@@ -10,7 +10,8 @@
     android:gravity="center"
     android:button="@null"
     android:background="@drawable/selector_option_goods_radiobutton"
-    android:textColor="@drawable/selector_option_goods_text">
+    android:textColor="@drawable/selector_option_goods_text"
+    android:checked="false">
 
 
 </RadioButton>
