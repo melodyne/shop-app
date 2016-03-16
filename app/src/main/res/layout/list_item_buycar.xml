@@ -74,7 +74,7 @@
             android:textColor="@color/yellow_f80"
             android:textSize="16sp" />
 
-        <include layout="@layout/goods_num_selector"/>
+        <include layout="@layout/goods_num_selector" />
 
     </LinearLayout>
 

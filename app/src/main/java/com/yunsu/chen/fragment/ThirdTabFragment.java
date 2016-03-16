@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -38,11 +39,18 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 
 	private Login login;
 	private RequestQueue queue;
-
+	private TextView addbt;//增加商品s
+	private TextView decbt;//减少商
+	private  Double tolMoney;
+	private  TextView tol;
 	private String url;//接口地址
 	private Dialog loadingDialog;
-
+	private View view;
+	private double num,num1;
+	private String a;
+	private List<Map<String, Object>> listPosition;
 	private WaterDropListView waterDropListView;
+	private AdapterShopcar myAdapter;
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -62,9 +70,9 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view=inflater.inflate(R.layout.main_fragment3, container, false);
+		 view=inflater.inflate(R.layout.main_fragment3, container, false);
 
-		loadingDialog= LoadingDialog.createLoadingDialog(getActivity(),getString(R.string.data_loading),true);
+		loadingDialog= LoadingDialog.createLoadingDialog(getActivity(), getString(R.string.data_loading), true);
 		loadingDialog.show();
 
 		queue= Volley.newRequestQueue(getActivity());//初始化Volly框架
@@ -73,6 +81,7 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 		waterDropListView = (WaterDropListView)view.findViewById(R.id.listview_car);
 		waterDropListView.setPullLoadEnable(true);
 		waterDropListView.setWaterDropListViewListener(this);//刷新加载监听
+		tol=(TextView)view.findViewById(R.id.tol);
 
 		login=new Login(getActivity());
 		login.chackLogin(new NetIntf() {
@@ -80,6 +89,7 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 			public void getNetMsg() {
 				initialView();//初始化组件
 				System.out.println("回调成功");
+
 			}
 		});
 
@@ -123,6 +133,45 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 		});
 	}
 
+//	public void init(){
+//		addbt=(TextView) view.findViewById(R.id.add);
+//		decbt=(TextView)view.findViewById(R.id.dec);
+//		tol=(TextView)view.findViewById(R.id.tol);
+//
+//		addbt.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				if (num<50) {
+//					num++;
+//					tolMoney=price*num;
+//					numTV.setText(num + "");
+//					tol.setText("总计：￥"+tolMoney);
+//				}else {
+//					num=50;
+//					tolMoney=price*num;
+//					numTV.setText(num + "");
+//					tol.setText("总计：￥"+tolMoney);
+//				}
+//			}
+//		});
+//
+//		decbt.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				if (num > 1) {
+//					num--;
+//					tolMoney = price * num;
+//					numTV.setText(num + "");
+//					tolTV.setText("总计：￥" + tolMoney);
+//				} else {
+//					num = 1;
+//					tolMoney = price * num;
+//					numTV.setText(num + "");
+//					tolTV.setText("总计：￥" + tolMoney);
+//				}
+//			}
+//		});
+//	}
 
 	private void initialView() {
 		//编辑事件绑定
@@ -155,13 +204,31 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 							String state=jsonObject.getString("status");
 							if (state.equals("success")){
 								/** 购物车列表  **/
-								List<Map<String, Object>> listPosition = (List<Map<String, Object>>) jsonObject.get("products");
+								 listPosition = (List<Map<String, Object>>) jsonObject.get("products");
 								if (listPosition == null || listPosition.toString().length() < 10) {
 									Log.e("购物车为空：", listPosition.toString());
 								} else {
-									Log.e("购物车：", listPosition.toString());
-									AdapterShopcar myAdapter = new AdapterShopcar(getActivity(), listPosition);
+									for (Map<String, Object> m : listPosition)
+									{
+										for (String k : m.keySet())
+										{	if (k=="total"){
+											a=m.get(k).toString();
+											a=a.replace("￥", "");
+											System.out.println(k + " : " + a);
+											num=Double.parseDouble(a);
+											num1=num1+num;
+											System.out.println(k + " : " + num1);
+											tol.setText("总计：￥"+num1);
+
+										}
+
+										}
+
+									}
+									Log.e("shopcar", listPosition.toString());
+									 myAdapter = new AdapterShopcar(getActivity(), listPosition);
 									waterDropListView.setAdapter(myAdapter);
+
 								}
 							}else if(state.equals("empty")){
 								Toast.makeText(getActivity(),"购物车为空！",Toast.LENGTH_LONG).show();

@@ -3,6 +3,7 @@ package com.yunsu.chen;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -75,6 +76,7 @@ public class BuyActivity extends YunsuActivity {
 
         Intent intent = getIntent();
         jsonStr = intent.getStringExtra("jsonStr");
+        Log.e("buy",jsonStr);
         JSONObject jsonObj = JSON.parseObject(jsonStr);
         System.out.println("商品信息："+jsonObj);
 
