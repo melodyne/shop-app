@@ -126,6 +126,10 @@ public class TravelDetailsActivity extends YunsuActivity {
                 webView.loadDataWithBaseURL(null, productDescription, "text/html", "utf-8", null);
                 webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
                 webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+                webView.getSettings().setLoadWithOverviewMode(true);
+
+                webView.getSettings().setUseWideViewPort(true);
+                webView.getSettings().setLoadWithOverviewMode(true);
 
                 titleTV.setText(productName);
 
