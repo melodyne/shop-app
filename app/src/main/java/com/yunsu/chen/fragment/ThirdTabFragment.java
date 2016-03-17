@@ -39,9 +39,6 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 
 	private Login login;
 	private RequestQueue queue;
-	private TextView addbt;//增加商品s
-	private TextView decbt;//减少商
-	private  Double tolMoney;
 	private  TextView tol;
 	private String url;//接口地址
 	private Dialog loadingDialog;
@@ -208,25 +205,9 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 								if (listPosition == null || listPosition.toString().length() < 10) {
 									Log.e("购物车为空：", listPosition.toString());
 								} else {
-									for (Map<String, Object> m : listPosition)
-									{
-										for (String k : m.keySet())
-										{	if (k=="total"){
-											a=m.get(k).toString();
-											a=a.replace("￥", "");
-											System.out.println(k + " : " + a);
-											num=Double.parseDouble(a);
-											num1=num1+num;
-											System.out.println(k + " : " + num1);
-											tol.setText("总计：￥"+num1);
 
-										}
-
-										}
-
-									}
 									Log.e("shopcar", listPosition.toString());
-									 myAdapter = new AdapterShopcar(getActivity(), listPosition);
+									 myAdapter = new AdapterShopcar(getActivity(), listPosition,tol);
 									waterDropListView.setAdapter(myAdapter);
 
 								}
