@@ -11,14 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yunsu.chen.GoodsActivity;
 import com.yunsu.chen.GoodsDetailsActivity;
 import com.yunsu.chen.slide.ImageLoaderUtil;
 import com.yunsu.chen.R;
@@ -86,6 +84,8 @@ public class AdapterShopcar extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
+        final TextView numTV=(TextView)view.findViewById(R.id.num);
+
 
         product_name = (String) listItems.get(position).get("name");
         String product_desc = (String) listItems.get(position).get("type");
@@ -114,7 +114,6 @@ public class AdapterShopcar extends BaseAdapter {
                 num++;
                 a = "" + num;
                 Log.e("qu",a);
-                TextView numTV=(TextView)v.findViewById(R.id.num);
                 numTV.setText(a);
                 // tolMoney = tolMoney + price;
             }
@@ -127,7 +126,6 @@ public class AdapterShopcar extends BaseAdapter {
                 Log.e("bbb", a);
                 num = Integer.parseInt(a);
                 num--;
-                TextView numTV=(TextView)v.findViewById(R.id.num);
                 numTV.setText(num);
                 //tolMoney = tolMoney + price;
             }
