@@ -5,7 +5,6 @@ package com.yunsu.chen;
  */
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,11 +29,8 @@ import com.yunsu.chen.interf.NetIntf;
 import com.yunsu.chen.slide.Advertisements;
 import com.yunsu.chen.slide.RequestManager;
 import com.yunsu.chen.config.Config;
-import com.yunsu.chen.handler.YunsuMap;
 import com.yunsu.chen.ui.YunsuActivity;
 
-import java.io.File;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;

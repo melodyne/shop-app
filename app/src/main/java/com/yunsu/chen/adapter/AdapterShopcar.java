@@ -31,9 +31,9 @@ public class AdapterShopcar extends BaseAdapter {
     String product_name;
     private ListView buycar;
     private TextView tolTv;//总价
-    private int num;
     private Double price;
     private  Double tolMoney;
+
     public AdapterShopcar(Context context, List<Map<String, Object>> listItems,TextView tol) {
         this.mContent = context;
         this.listItems = listItems;
@@ -100,21 +100,17 @@ public class AdapterShopcar extends BaseAdapter {
         String aaa = (String) listItems.get(position).get("total");//id
         Log.e("tol", aaa + "");
 
-
-
-
-
+        String a = (String) listItems.get(position).get("quantity");
+        Log.e("aaa", a);
+        int num = Integer.parseInt(a);
+        numTV.setText(num + "");
 
         holder.addbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String a = (String) listItems.get(position).get("quantity");
-                Log.e("aaa", a);
-                num = Integer.parseInt(a);
-                num++;
-                a = "" + num;
-                Log.e("qu",a);
-                numTV.setText(a);
+                int i=Integer.parseInt(numTV.getText().toString());
+                i++;
+                numTV.setText(i+"");
                 // tolMoney = tolMoney + price;
             }
         });
@@ -122,11 +118,9 @@ public class AdapterShopcar extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                String a = (String) listItems.get(position).get("quantity");
-                Log.e("bbb", a);
-                num = Integer.parseInt(a);
-                num--;
-                numTV.setText(num);
+                int i=Integer.parseInt(numTV.getText().toString());
+                i--;
+                numTV.setText(i+"");
                 //tolMoney = tolMoney + price;
             }
         });
