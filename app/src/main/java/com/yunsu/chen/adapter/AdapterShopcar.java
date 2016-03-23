@@ -97,9 +97,22 @@ public class AdapterShopcar extends BaseAdapter {
         holder.priceTV.setText(product_price);
 
         Log.e("hhhhhh", listItems + "");
+        //初始化总价
         String aaa = (String) listItems.get(position).get("total");//id
-        Log.e("tol", aaa + "");
+        aaa=aaa.replace("￥", "");
+        double tol1=Double.parseDouble(aaa);
+        if (tolMoney==null){
+            tolMoney=0.00;
+            tolMoney=tolMoney+tol1;
+            Log.e("tol", tolMoney + "");
+            tolTv.setText(tolMoney+"");
+        }else {
+            tolMoney=tolMoney+tol1;
+            Log.e("tol", tolMoney + "");
+            tolTv.setText(tolMoney+"");
+        }
 
+        //初始化数量
         String a = (String) listItems.get(position).get("quantity");
         Log.e("aaa", a);
         int num = Integer.parseInt(a);
@@ -108,10 +121,17 @@ public class AdapterShopcar extends BaseAdapter {
         holder.addbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //设置数量
                 int i=Integer.parseInt(numTV.getText().toString());
                 i++;
                 numTV.setText(i+"");
-                // tolMoney = tolMoney + price;
+                //设置总价
+                String a=(String) listItems.get(position).get("price");
+                a=a.replace("￥", "");
+                double tol1=Double.parseDouble(a);
+                tolMoney=tolMoney+tol1;
+                tolTv.setText(tolMoney+"");
+
             }
         });
         holder.decbt.setOnClickListener(new View.OnClickListener() {
@@ -119,8 +139,18 @@ public class AdapterShopcar extends BaseAdapter {
             public void onClick(View v) {
 
                 int i=Integer.parseInt(numTV.getText().toString());
-                i--;
-                numTV.setText(i+"");
+                //判断不能小于0
+                if (i>0) {
+                    //设置数量
+                    i--;
+                    numTV.setText(i+"");
+                    //设置总价
+                    String a=(String) listItems.get(position).get("price");
+                    a=a.replace("￥", "");
+                    double tol1=Double.parseDouble(a);
+                    tolMoney=tolMoney-tol1;
+                    tolTv.setText(tolMoney+"");}
+
                 //tolMoney = tolMoney + price;
             }
         });
