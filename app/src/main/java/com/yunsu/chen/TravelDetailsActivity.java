@@ -1,6 +1,5 @@
 package com.yunsu.chen;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -122,14 +121,15 @@ public class TravelDetailsActivity extends YunsuActivity {
                     YunsuUI.setListViewHeightBasedOnChildren(travelRecommendLV);
                 }
 
+                //添加css让图片自适应组件的共和党
+                productDescription="<style>img{max-width:100%;height:auto}" +
+                 "video{max-width:100%;height:auto}</style>"+productDescription;
 
                 webView.loadDataWithBaseURL(null, productDescription, "text/html", "utf-8", null);
                 webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
                 webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
                 webView.getSettings().setLoadWithOverviewMode(true);
-
-                webView.getSettings().setUseWideViewPort(true);
-                webView.getSettings().setLoadWithOverviewMode(true);
+                webView.getSettings().setJavaScriptEnabled(true);//允许执行js
 
                 titleTV.setText(productName);
 
