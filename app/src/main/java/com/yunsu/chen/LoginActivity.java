@@ -265,7 +265,7 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 6;
+        return (password.length() >=4||password.length() <=20);
     }
 
     /**
@@ -414,7 +414,7 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
         StringRequest stringRequest = new StringRequest(Request.Method.POST, loginUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.e("登录结果", response);
+                        Log.e("登录结果", response+"kk");
                         Map<String, String> map = new HashMap<String, String>();
                         JSONObject jsonObject = JSONObject.parseObject(response);
                         for (java.util.Map.Entry<String, Object> entry : jsonObject.entrySet()) {
@@ -482,7 +482,7 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
 
                     @Override
                     public void onResponse(String response) {
-                        Log.e("登录状态", response);
+                        Log.e("登录状态", response+"ll");
                         if (response.trim().equals("1")) {
 
                             Toast.makeText(getApplicationContext(), username + "登录成功！", Toast.LENGTH_LONG).show();
