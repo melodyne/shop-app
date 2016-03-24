@@ -54,14 +54,17 @@
             android:layout_weight="2"
             android:text="土鸡蛋"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:paddingTop="5dp"/>
 
         <Button
-            android:layout_width="79dp"
-            android:layout_height="35dp"
-            android:text="TX"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:layout_margin="3dp"
+            android:background="@color/bg_tille"
+            android:text="@string/delete"
+            android:textColor="@color/white"
             android:id="@+id/test" />
 
         <TextView

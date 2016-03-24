@@ -14,12 +14,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yunsu.chen.GoodsDetailsActivity;
-import com.yunsu.chen.config.Config;
 import com.yunsu.chen.handler.YunsuHttp;
 import com.yunsu.chen.interf.NetIntf;
 import com.yunsu.chen.slide.ImageLoaderUtil;
@@ -30,23 +28,22 @@ import java.util.List;
 import java.util.Map;
 
 public class AdapterShopcar extends BaseAdapter {
-    Context mContent = null;
-    List<Map<String, Object>> listItems = null;
 
-    String product_name;
-    private ListView buycar;
+    private Context mContent = null;
+    private List<Map<String, Object>> listItems = null;
+
+    private String product_name;
     private TextView tolTv;//总价
-    private Double price;
+
     private  Double tolMoney;
-    private String url;
+    private String url="index.php?route=moblie/checkout/cart/remove";
+
     public AdapterShopcar(Context context, List<Map<String, Object>> listItems,TextView tol) {
         this.mContent = context;
         this.listItems = listItems;
         this.tolTv=tol;
     }
-    public AdapterShopcar() {
 
-    }
     @Override
     public int getCount() {
         return listItems.size();
@@ -127,26 +124,23 @@ public class AdapterShopcar extends BaseAdapter {
         holder.tx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String a = (String) listItems.get(position).get("cart_id");
+                String cart_id = (String) listItems.get(position).get("cart_id");
 
-               // int b= Integer.parseInt(a);
-                Log.e("tx", "" + a);
-                HashMap<String ,String > txmap=new HashMap<String ,String>();
-                txmap.put("key", a);
-                final YunsuHttp  tx=new YunsuHttp(mContent);
-                url="index.php?route=moblie/checkout/cart/remove";
-               tx.doPost(url, txmap, new NetIntf() {
-                   @Override
-                   public void getNetMsg() {
-                       String httpJson = tx.getJsonString();
-                      // Toast.makeText(mContent, httpJson, Toast.LENGTH_LONG).show();
+                HashMap<String ,String > map=new HashMap<String ,String>();
+                map.put("key", cart_id);
 
+                final YunsuHttp  yunsuHttp=new YunsuHttp(mContent);
+                yunsuHttp.doPost(url, map, new NetIntf() {
+                    @Override
+                    public void getNetMsg() {
+                        String httpJson = yunsuHttp.getJsonString();
+                        System.out.println("删除购物车>>>>>>>" + httpJson);
+
+                        //更新ListVie
+                        listItems.remove(position);
+                        notifyDataSetChanged();//通知ListView数据有更新
                    }
                });
-
-                listItems.remove(position);
-                AdapterShopcar Shopcar = new AdapterShopcar();
-                Shopcar.notifyDataSetChanged();
 
             }
         });

@@ -55,7 +55,7 @@
         <!-- 我的信息 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="53dp"
             android:background="@color/white"
             android:clickable="true"
             android:onClick="doUserMsg"
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/user_msg"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -99,8 +99,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/right" />
             </LinearLayout>
 
@@ -109,7 +109,7 @@
         <!-- 订单列表 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:clickable="true"
@@ -142,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/user_oder"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -154,8 +154,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/right" />
             </LinearLayout>
 
@@ -169,7 +169,7 @@
         <!-- 购物车 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:background="@color/white"
             android:clickable="true"
             android:onClick="doCar"
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/user_buycar"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -213,8 +213,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/right" />
             </LinearLayout>
 
@@ -229,7 +229,7 @@
         <LinearLayout
             android:id="@+id/ly_about_but"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:background="@color/white"
             android:orientation="horizontal">
 
@@ -259,7 +259,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/user_about"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -271,8 +271,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/right" />
             </LinearLayout>
 
@@ -282,7 +282,7 @@
         <LinearLayout
             android:id="@+id/ly_exit_but"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:orientation="horizontal"
@@ -314,7 +314,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/user_exit"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -325,10 +325,6 @@
                 android:gravity="right|center_vertical"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/right" />
             </LinearLayout>
 
         </LinearLayout>
