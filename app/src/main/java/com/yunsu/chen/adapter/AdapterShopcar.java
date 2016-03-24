@@ -19,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yunsu.chen.GoodsDetailsActivity;
+import com.yunsu.chen.config.Config;
 import com.yunsu.chen.handler.YunsuHttp;
+import com.yunsu.chen.interf.NetIntf;
 import com.yunsu.chen.slide.ImageLoaderUtil;
 import com.yunsu.chen.R;
 
@@ -36,7 +38,7 @@ public class AdapterShopcar extends BaseAdapter {
     private TextView tolTv;//总价
     private Double price;
     private  Double tolMoney;
-
+    private String url;
     public AdapterShopcar(Context context, List<Map<String, Object>> listItems,TextView tol) {
         this.mContent = context;
         this.listItems = listItems;
@@ -125,12 +127,22 @@ public class AdapterShopcar extends BaseAdapter {
             public void onClick(View v) {
                 String a = (String) listItems.get(position).get("cart_id");
 
-                int b= Integer.parseInt(a);
-                Log.e("tx", "" + b);
-                HashMap<String ,Integer > txmap=new HashMap<String ,Integer>();
-                txmap.put("Key",b);
-                YunsuHttp tx=new YunsuHttp(mContent);
-               // tx.doPost(http://210.37.0.21/opencart/index.php?route=moblie/checkout/cart/remove,);
+               // int b= Integer.parseInt(a);
+                Log.e("tx", "" + a);
+                HashMap<String ,String > txmap=new HashMap<String ,String>();
+                txmap.put("Key",a);
+                final YunsuHttp  tx=new YunsuHttp(mContent);
+                url="index.php?route=moblie/checkout/cart/remove";
+               tx.doPost(url, txmap, new NetIntf() {
+
+
+
+                   @Override
+                   public void getNetMsg() {
+                     String httpJson=tx.getJsonString();
+                        Toast.makeText(mContent,httpJson,Toast.LENGTH_LONG).show();
+                   }
+               });
 
             }
         });
