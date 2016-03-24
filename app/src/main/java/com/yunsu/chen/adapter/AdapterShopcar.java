@@ -44,7 +44,9 @@ public class AdapterShopcar extends BaseAdapter {
         this.listItems = listItems;
         this.tolTv=tol;
     }
+    public AdapterShopcar() {
 
+    }
     @Override
     public int getCount() {
         return listItems.size();
@@ -130,19 +132,21 @@ public class AdapterShopcar extends BaseAdapter {
                // int b= Integer.parseInt(a);
                 Log.e("tx", "" + a);
                 HashMap<String ,String > txmap=new HashMap<String ,String>();
-                txmap.put("Key",a);
+                txmap.put("key", a);
                 final YunsuHttp  tx=new YunsuHttp(mContent);
                 url="index.php?route=moblie/checkout/cart/remove";
                tx.doPost(url, txmap, new NetIntf() {
-
-
-
                    @Override
                    public void getNetMsg() {
-                     String httpJson=tx.getJsonString();
-                        Toast.makeText(mContent,httpJson,Toast.LENGTH_LONG).show();
+                       String httpJson = tx.getJsonString();
+                      // Toast.makeText(mContent, httpJson, Toast.LENGTH_LONG).show();
+
                    }
                });
+
+                listItems.remove(position);
+                AdapterShopcar Shopcar = new AdapterShopcar();
+                Shopcar.notifyDataSetChanged();
 
             }
         });
