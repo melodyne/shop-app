@@ -224,14 +224,14 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
+        // 检查密码
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             input_password.setError(getString(R.string.error_invalid_password));
             focusView = input_password;
             cancel = true;
         }
 
-        // Check for a valid email address.
+        // 检查手机号码
         if (TextUtils.isEmpty(user)) {
             input_user.setError(getString(R.string.error_input_empty));
             focusView = input_user;
@@ -247,11 +247,8 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
             // form field with an error.
             focusView.requestFocus();
         } else {
-            //验证通过后，登录
-            userLogin();
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            loadingDialog.show();
+            userLogin();//登录
+            loadingDialog.show();//显示网络等待图标
 
 
         }
@@ -265,7 +262,7 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return (password.length() >=4||password.length() <=20);
+        return password.length() >=4;
     }
 
     /**
@@ -342,7 +339,7 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
     }
 
     /**
-     * Represents an asynchronous login/registration task used to authenticate
+     * 代表一个异步登录/注册任务用于验证
      * the user.
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
@@ -369,7 +366,7 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
+                    // 账户存在,返回true,如果密码匹配。
                     return pieces[1].equals(mPassword);
                 }
             }
@@ -414,35 +411,47 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
         StringRequest stringRequest = new StringRequest(Request.Method.POST, loginUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.e("登录结果", response+"kk");
+                        System.out.println("登录结果>>>>>>>"+response);
                         Map<String, String> map = new HashMap<String, String>();
-                        JSONObject jsonObject = JSONObject.parseObject(response);
-                        for (java.util.Map.Entry<String, Object> entry : jsonObject.entrySet()) {
-                            System.out.println(entry.getKey() + "-" + entry.getValue() + "\t");
-                            map.put(entry.getKey(), entry.getValue().toString());
+                        JSONObject jsonObject=null;
+                        try {
+                            jsonObject = JSONObject.parseObject(response);
+                            for (java.util.Map.Entry<String, Object> entry : jsonObject.entrySet()) {
+                                System.out.println(entry.getKey() + "-" + entry.getValue() + "\t");
+                                map.put(entry.getKey(), entry.getValue().toString());
+                            }
+
+                            if (map.get("status").trim().equals("success")) {
+                                System.out.println("---------2--------");
+                                SharedPreferences preferences = getSharedPreferences("cookies", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.clear();
+                                editor.commit();
+                                editor.putString("cookie", cooke);
+                                editor.putString("logintype","aut");
+                                editor.commit();
+
+                                username = map.get("name");
+                                getUserMsg();//验证是否登录成功！
+                            } else {
+                                System.out.println("---------3--------");
+                                Toast.makeText(LoginActivity.this, map.get("tip"), Toast.LENGTH_LONG).show();
+                            }
+                        }catch (Exception e){
+                            System.out.println("解析出错>>>>>>>"+e);
+                            loadingDialog.dismiss();//取消加载对话框
+                            Toast.makeText(LoginActivity.this,R.string.error_incorrect_password, Toast.LENGTH_LONG).show();
                         }
 
-                        if (map.get("status").trim().equals("success")) {
-                            SharedPreferences preferences = getSharedPreferences("cookies", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.clear();
-                            editor.commit();
-                            editor.putString("cookie", cooke);
-                            editor.putString("logintype","aut");
-                            editor.commit();
 
-                            username = map.get("name");
-                            getUserMsg();//验证是否登录成功！
-                        } else {
-                            Toast.makeText(LoginActivity.this, map.get("tip"), Toast.LENGTH_LONG).show();
-                        }
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("err==", error.getMessage(), error);
+                        Log.e("无法连接到服务器", error.getMessage(), error);
+                        Toast.makeText(getApplicationContext(), R.string.err_server, Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -486,8 +495,8 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
                         if (response.trim().equals("1")) {
 
                             Toast.makeText(getApplicationContext(), username + "登录成功！", Toast.LENGTH_LONG).show();
-                            //取消加载对话框
-                            loadingDialog.dismiss();
+
+                            loadingDialog.dismiss();//取消加载对话框
 
                             //结束该界面
                             mAuthTask = new UserLoginTask(user, password);
@@ -502,6 +511,7 @@ public class LoginActivity extends YunsuActivity implements LoaderCallbacks<Curs
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("网络错误", error.toString());
+                Toast.makeText(getApplicationContext(), R.string.err_server, Toast.LENGTH_LONG).show();
             }
         }
         ) {
