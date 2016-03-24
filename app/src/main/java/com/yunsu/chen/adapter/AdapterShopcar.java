@@ -12,15 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yunsu.chen.GoodsDetailsActivity;
+import com.yunsu.chen.handler.YunsuHttp;
 import com.yunsu.chen.slide.ImageLoaderUtil;
 import com.yunsu.chen.R;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +75,7 @@ public class AdapterShopcar extends BaseAdapter {
             holder.describeTV = (TextView) view.findViewById(R.id.tv_shopcar_jianjie);
             holder.priceTV = (TextView) view.findViewById(R.id.tv_shopcar_price);
             holder.imgIV = (ImageView) view.findViewById(R.id.iv_shopcar_img);
-
+            holder.tx=(Button)view.findViewById(R.id.test);
             holder.addbt=(TextView)view.findViewById(R.id.add);
             holder.decbt=(TextView)view.findViewById(R.id.dec);
 
@@ -117,6 +120,20 @@ public class AdapterShopcar extends BaseAdapter {
         Log.e("aaa", a);
         int num = Integer.parseInt(a);
         numTV.setText(num + "");
+        holder.tx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String a = (String) listItems.get(position).get("cart_id");
+
+                int b= Integer.parseInt(a);
+                Log.e("tx", "" + b);
+                HashMap<String ,Integer > txmap=new HashMap<String ,Integer>();
+                txmap.put("Key",b);
+                YunsuHttp tx=new YunsuHttp(mContent);
+               // tx.doPost(http://210.37.0.21/opencart/index.php?route=moblie/checkout/cart/remove,);
+
+            }
+        });
 
         holder.addbt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,6 +206,7 @@ public class AdapterShopcar extends BaseAdapter {
         ImageView imgIV;
         TextView addbt;//增加商品s
         TextView decbt;//减少商
+        Button tx;
     }
 }
 

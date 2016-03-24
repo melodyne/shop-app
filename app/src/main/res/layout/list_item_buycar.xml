@@ -58,6 +58,12 @@
             android:textStyle="bold"
             android:paddingTop="5dp"/>
 
+        <Button
+            android:layout_width="79dp"
+            android:layout_height="35dp"
+            android:text="TX"
+            android:id="@+id/test" />
+
         <TextView
             android:id="@+id/tv_shopcar_jianjie"
             android:layout_width="match_parent"

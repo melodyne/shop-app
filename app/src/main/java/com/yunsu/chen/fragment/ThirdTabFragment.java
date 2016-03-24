@@ -130,45 +130,6 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 		});
 	}
 
-//	public void init(){
-//		addbt=(TextView) view.findViewById(R.id.add);
-//		decbt=(TextView)view.findViewById(R.id.dec);
-//		tol=(TextView)view.findViewById(R.id.tol);
-//
-//		addbt.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				if (num<50) {
-//					num++;
-//					tolMoney=price*num;
-//					numTV.setText(num + "");
-//					tol.setText("总计：￥"+tolMoney);
-//				}else {
-//					num=50;
-//					tolMoney=price*num;
-//					numTV.setText(num + "");
-//					tol.setText("总计：￥"+tolMoney);
-//				}
-//			}
-//		});
-//
-//		decbt.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				if (num > 1) {
-//					num--;
-//					tolMoney = price * num;
-//					numTV.setText(num + "");
-//					tolTV.setText("总计：￥" + tolMoney);
-//				} else {
-//					num = 1;
-//					tolMoney = price * num;
-//					numTV.setText(num + "");
-//					tolTV.setText("总计：￥" + tolMoney);
-//				}
-//			}
-//		});
-//	}
 
 	private void initialView() {
 		//编辑事件绑定
