@@ -14,15 +14,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yunsu.chen.GoodsDetailsActivity;
 import com.yunsu.chen.handler.YunsuHttp;
 import com.yunsu.chen.interf.NetIntf;
+import com.yunsu.chen.javabean.CarViewBean;
 import com.yunsu.chen.slide.ImageLoaderUtil;
 import com.yunsu.chen.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,27 +34,55 @@ public class AdapterShopcar extends BaseAdapter {
 
     private Context mContent = null;
     private List<Map<String, Object>> listItems = null;
+    private boolean isShow=true;//是否显示
 
     private String product_name;
     private TextView tolTv;//总价
+    private LinearLayout carBar;
+    private TextView editBt;
+    private List<Button> delCarBtList=new ArrayList<Button>();
+
 
     private  Double tolMoney;
     private String url="index.php?route=moblie/checkout/cart/remove";
 
-    public AdapterShopcar(Context context, List<Map<String, Object>> listItems,TextView tol) {
+    public AdapterShopcar(Context context, List<Map<String, Object>> listItems,CarViewBean carViewBean) {
         this.mContent = context;
         this.listItems = listItems;
-        this.tolTv=tol;
+        tolTv=carViewBean.getTolprice();
+        carBar=carViewBean.getCarBar();
+        editBt=carViewBean.getEditBt();
     }
 
     @Override
     public int getCount() {
+
+        //显示或不显示删除按钮
+        editBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isShow){
+                    isShow=false;
+                    for (int i=0;i<listItems.size();i++){
+                        Button delBT=(Button)getItem(i);
+                        delBT.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    isShow=true;
+                    for (int i=0;i<listItems.size();i++){
+                        Button delBT=(Button)getItem(i);
+                        delBT.setVisibility(View.GONE);
+                    }
+                }
+
+            }
+        });
         return listItems.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return delCarBtList.get(position);
     }
 
     @Override
@@ -76,10 +107,8 @@ public class AdapterShopcar extends BaseAdapter {
             holder.describeTV = (TextView) view.findViewById(R.id.tv_shopcar_jianjie);
             holder.priceTV = (TextView) view.findViewById(R.id.tv_shopcar_price);
             holder.imgIV = (ImageView) view.findViewById(R.id.iv_shopcar_img);
-            holder.tx=(Button)view.findViewById(R.id.test);
             holder.addbt=(TextView)view.findViewById(R.id.add);
             holder.decbt=(TextView)view.findViewById(R.id.dec);
-
 
             view.setTag(holder);
         } else {
@@ -89,6 +118,9 @@ public class AdapterShopcar extends BaseAdapter {
         }
 
         final TextView numTV=(TextView)view.findViewById(R.id.num);
+        final Button delCarBt=(Button)view.findViewById(R.id.test);
+        delCarBtList.add(delCarBt);
+        delCarBt.setVisibility(View.GONE);
 
 
         product_name = (String) listItems.get(position).get("name");
@@ -121,7 +153,9 @@ public class AdapterShopcar extends BaseAdapter {
         Log.e("aaa", a);
         int num = Integer.parseInt(a);
         numTV.setText(num + "");
-        holder.tx.setOnClickListener(new View.OnClickListener() {
+
+
+        delCarBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String cart_id = (String) listItems.get(position).get("cart_id");
@@ -139,6 +173,11 @@ public class AdapterShopcar extends BaseAdapter {
                         //更新ListVie
                         listItems.remove(position);
                         notifyDataSetChanged();//通知ListView数据有更新
+
+                        System.out.println("剩余购物车>>>>>>>"+listItems);
+                        if(listItems.toString().equals("[]")){
+                            carBar.setVisibility(View.GONE);
+                        }
                    }
                });
 
@@ -206,17 +245,13 @@ public class AdapterShopcar extends BaseAdapter {
 
         return view;
     }
-    public  void touch(int num, final double price, final double tolMoney){
 
-
-
-    }
     class ViewHolder {
         TextView pnameTV, describeTV, priceTV;
         ImageView imgIV;
         TextView addbt;//增加商品s
         TextView decbt;//减少商
-        Button tx;
     }
+
 }
 

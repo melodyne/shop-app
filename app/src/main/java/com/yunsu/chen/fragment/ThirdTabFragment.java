@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import com.yunsu.chen.adapter.AdapterShopcar;
 import com.yunsu.chen.config.Config;
 import com.yunsu.chen.handler.Login;
 import com.yunsu.chen.interf.NetIntf;
+import com.yunsu.chen.javabean.CarViewBean;
 import com.yunsu.chen.listview.WaterDropListView;
 import com.yunsu.chen.ui.LoadingDialog;
 
@@ -43,9 +46,12 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 	private String url;//接口地址
 	private Dialog loadingDialog;
 	private View view;
-	private double num,num1;
-	private String a;
 	private List<Map<String, Object>> listPosition;
+	private LinearLayout carBar;
+
+	private CarViewBean carViewBean;
+
+	private TextView edit;
 	private WaterDropListView waterDropListView;
 	private AdapterShopcar myAdapter;
 	private Handler handler = new Handler() {
@@ -72,26 +78,36 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 		loadingDialog= LoadingDialog.createLoadingDialog(getActivity(), getString(R.string.data_loading), true);
 		loadingDialog.show();
 
+		//编辑事件绑定
+		try{
+			edit=(TextView)getActivity().findViewById(R.id.tv_top_edit);
+			carBar=(LinearLayout)view.findViewById(R.id.car_bar);
+			tol=(TextView)view.findViewById(R.id.tol);
+
+		}catch (Exception e){
+			Log.e("编辑按钮",e.toString());
+		}
+
+		carViewBean=new CarViewBean();
+		carViewBean.setEditBt(edit);
+		carViewBean.setCarBar(carBar);
+		carViewBean.setTolprice(tol);
+
 		queue= Volley.newRequestQueue(getActivity());//初始化Volly框架
 		url= Config.basiSurl+"index.php?route=moblie/checkout/cart";
 
 		waterDropListView = (WaterDropListView)view.findViewById(R.id.listview_car);
 		waterDropListView.setPullLoadEnable(true);
 		waterDropListView.setWaterDropListViewListener(this);//刷新加载监听
-		tol=(TextView)view.findViewById(R.id.tol);
 
 		login=new Login(getActivity());
 		login.chackLogin(new NetIntf() {
 			@Override
 			public void getNetMsg() {
 				initialView();//初始化组件
-				System.out.println("回调成功");
 
 			}
 		});
-
-
-
 
 		return view;
 	}
@@ -132,18 +148,7 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 
 
 	private void initialView() {
-		//编辑事件绑定
-		try{
-			TextView edit=(TextView)getActivity().findViewById(R.id.tv_top_edit);
-			edit.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					Toast.makeText(getActivity(),"编辑",Toast.LENGTH_LONG).show();
-				}
-			});
-		}catch (Exception e){
-			Log.e("编辑按钮",e.toString());
-		}
+
 		/** volly网络处理 **/
 
 		StringRequest mStringRequest = new StringRequest(url,
@@ -168,13 +173,17 @@ public class ThirdTabFragment extends Fragment implements WaterDropListView.IWat
 								} else {
 
 									Log.e("shopcar", listPosition.toString());
-									 myAdapter = new AdapterShopcar(getActivity(), listPosition,tol);
+									myAdapter = new AdapterShopcar(getActivity(), listPosition,carViewBean);
 									waterDropListView.setAdapter(myAdapter);
 
 								}
 							}else if(state.equals("empty")){
 								Toast.makeText(getActivity(),"购物车为空！",Toast.LENGTH_LONG).show();
+								waterDropListView.setVisibility(View.GONE);
+								carBar.setVisibility(View.GONE);
 							}else {
+								waterDropListView.setVisibility(View.GONE);
+								carBar.setVisibility(View.GONE);
 								String tip=jsonObject.getString("tip");
 								Toast.makeText(getActivity(),tip,Toast.LENGTH_LONG).show();
 							}
