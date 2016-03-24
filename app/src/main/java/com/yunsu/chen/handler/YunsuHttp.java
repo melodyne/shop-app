@@ -12,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.yunsu.chen.R;
 import com.yunsu.chen.config.Config;
 import com.yunsu.chen.interf.NetIntf;
 
@@ -96,7 +97,7 @@ public class YunsuHttp {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("网络出错：", error.getMessage(), error);
-                        Toast.makeText(context, "网络不可用！", Toast.LENGTH_LONG);
+                        Toast.makeText(context, R.string.err_server, Toast.LENGTH_LONG);
                     }
                 }
         ) {

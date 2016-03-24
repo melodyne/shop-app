@@ -40,7 +40,7 @@ public class AdapterShopcar extends BaseAdapter {
     private TextView tolTv;//总价
     private LinearLayout carBar;
     private TextView editBt;
-    private List<Button> delCarBtList=new ArrayList<Button>();
+    private List<Button> delCarBtList=new ArrayList<Button>();//放按钮组
 
 
     private  Double tolMoney;

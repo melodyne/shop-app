@@ -121,7 +121,7 @@ public class TravelDetailsActivity extends YunsuActivity {
                     YunsuUI.setListViewHeightBasedOnChildren(travelRecommendLV);
                 }
 
-                //添加css让图片自适应组件的共和党
+                //添加css让图片自适应组件
                 productDescription="<style>img{max-width:100%;height:auto}" +
                  "video{max-width:100%;height:auto}</style>"+productDescription;
 

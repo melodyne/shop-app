@@ -71,5 +71,6 @@
     <string name="weixinpay">微信支付</string>
     <string name="weixinad">亿万用户的选择，更快更安全</string>
     <string name="delete">删除</string>
+    <string name="collection">收藏</string>
 
 </resources>

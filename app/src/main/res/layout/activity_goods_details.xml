@@ -3,62 +3,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_f2"
-    android:fitsSystemWindows="true"
-    android:clipToPadding="true">
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true">
 
     <include
         android:id="@+id/title"
         layout="@layout/top_title" />
+
     <LinearLayout
         android:id="@+id/buy"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/boder"
-        android:layout_alignParentBottom="true">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:clickable="true"
             android:layout_marginTop="1dp"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:clickable="true"
+            android:gravity="center_vertical"
             android:onClick="doCar"
-            android:background="@color/white">
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/tab3_cart_active"/>
+                android:src="@drawable/tab3_cart_active" />
 
-        <TextView
+            <TextView
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="加入购物车"
-            android:textSize="15sp"
-            android:gravity="center_vertical"
-            android:textColor="@color/gray"
-            android:background="@color/white"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text="加入购物车"
+                android:textColor="@color/gray"
+                android:textSize="15sp" />
         </LinearLayout>
+
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:text="立即购买"
+            android:background="@color/yellow_f80"
             android:onClick="doBuy"
-            android:textColor="@color/white"
-            android:background="@color/yellow_f80"/>
+            android:text="立即购买"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title"
-        android:layout_above="@id/buy">
+        android:layout_above="@id/buy"
+        android:layout_below="@id/title">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,15 +82,52 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <TextView
-                    android:id="@+id/tv_product_name"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="天涯海角"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="天涯海角"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="3dp"
+                        android:background="@color/gray" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:onClick="doCollection"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/tab2_favorite_active" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/collection" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/tv_product_pice"
@@ -136,11 +176,11 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/white"
+                android:clickable="true"
                 android:gravity="center_vertical"
+                android:onClick="doBuy"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
-                android:clickable="true"
-                android:onClick="doBuy"
                 android:paddingRight="20dp">
 
                 <TextView
@@ -171,102 +211,116 @@
                 </LinearLayout>
             </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <!--  1商品介绍 -->
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/product_introduce"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:layout_centerInParent="true"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:orientation="vertical"
-                    android:background="@color/blue_afc"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"/>
-
-            </RelativeLayout>
             <LinearLayout
-                android:layout_width="1dp"
-                android:layout_height="30dp"
-                android:background="@color/gray"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!--  1商品介绍 -->
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/product_introduce"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/bg_tille"
+                        android:orientation="vertical" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:background="@color/gray"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <!--  2规格参数 -->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/product_parameter"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/bg_tille"
+                        android:orientation="vertical" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:background="@color/gray"
+                    android:orientation="vertical"></LinearLayout>
+
+                <!--  3购买须知 -->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/product_instructions"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/bg_tille"
+                        android:orientation="vertical" />
+
+                </RelativeLayout>
 
             </LinearLayout>
-
-            <!--  2规格参数 -->
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/product_parameter"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:layout_centerInParent="true"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:orientation="vertical"
-                    android:background="@color/blue_afc"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"/>
-
-            </RelativeLayout>
             <LinearLayout
-                android:layout_width="1dp"
-                android:layout_height="30dp"
-                android:background="@color/gray"
-                android:orientation="vertical">
-            </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <!--  3购买须知 -->
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/product_instructions"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:layout_centerInParent="true"/>
-                <LinearLayout
+                <WebView
+                    android:id="@+id/wv_product_description"
                     android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:orientation="vertical"
-                    android:background="@color/blue_afc"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"/>
+                    android:layout_height="wrap_content"/>
 
-            </RelativeLayout>
-
-        </LinearLayout>
-            <include layout="@layout/shop_details_buy"/>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

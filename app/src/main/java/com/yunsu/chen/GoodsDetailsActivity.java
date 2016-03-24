@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +42,8 @@ public class GoodsDetailsActivity extends YunsuActivity {
 
     private LinearLayout llAdvertiseBoard;
     private LayoutInflater lyflater;
-    private TextView productNameTV, productPriceTV;
+    private TextView productNameTV, productPriceTV,titleTV;
+    private WebView webView;
 
 
     private String product_id, url_list;
@@ -57,15 +60,18 @@ public class GoodsDetailsActivity extends YunsuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_details);
 
+        titleTV=(TextView)findViewById(R.id.tv_title_top);
         llAdvertiseBoard = (LinearLayout) findViewById(R.id.slide_travel);
         productNameTV = (TextView) findViewById(R.id.tv_product_name);
         productPriceTV = (TextView) findViewById(R.id.tv_product_pice);
+        webView=(WebView)findViewById(R.id.wv_product_description);
 
 
         RequestManager.init(this);
         lyflater = LayoutInflater.from(this);
 
         mRequestQueue = Volley.newRequestQueue(this);//载入框架
+        yunsuHttp=new YunsuHttp(this);
 
         Intent intent = getIntent();
         product_id = intent.getStringExtra("product_id");
@@ -105,6 +111,7 @@ public class GoodsDetailsActivity extends YunsuActivity {
                 String productName = jsonObj.getString("product_name");
                 System.out.println(productName+"");
                 productNameTV.setText(productName);
+                titleTV.setText(productName);
 
                 /** 价格  **/
                 String productPrice = jsonObj.getString("price");
@@ -113,6 +120,10 @@ public class GoodsDetailsActivity extends YunsuActivity {
 
                 /** 特价  **/
                 String productSpecial = jsonObj.getString("special");
+
+                /** 商品详情  **/
+                String description = jsonObj.getString("description");
+                setValueWebView(description);
 
 
                 //商品规格
@@ -185,21 +196,53 @@ public class GoodsDetailsActivity extends YunsuActivity {
     //加入购物车
     public void doCar(View view) {
         Map<String,String> map=new HashMap<String,String>();
-        map.put("product_id",product_id);
-        map.put("quantity",goodsNum);
-        map.put("option["+product_option_id+"]",product_option_value_id);
+        map.put("product_id", product_id);
+        map.put("quantity", goodsNum);
+        map.put("option[" + product_option_id + "]", product_option_value_id);
 
-        yunsuHttp=new YunsuHttp(this);
         yunsuHttp.doPost("index.php?route=moblie/checkout/cart/add", map, new NetIntf() {
             @Override
             public void getNetMsg() {
                 String jsonString = yunsuHttp.getJsonString();
-                Map<String,String> map=JsonDispose.toMapStr(jsonString);
-                System.out.println("map:" + map);
+                Map<String, String> map = JsonDispose.toMapStr(jsonString);
                 Toast.makeText(GoodsDetailsActivity.this, map.get("tip"), Toast.LENGTH_LONG).show();
 
             }
         });
 
+    }
+
+    //收藏
+    public void doCollection(View v){
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("product_id",product_id);
+        yunsuHttp.doPost("index.php?route=moblie/account/wishlist/add",map, new NetIntf() {
+            @Override
+            public void getNetMsg() {
+                String jsonString=yunsuHttp.getJsonString();
+                System.out.println("收藏>>>>>>"+jsonString);
+                Map<String, String> map = JsonDispose.toMapStr(jsonString);
+                if(jsonString.length()>5){
+                    Toast.makeText(GoodsDetailsActivity.this, map.get("tip"), Toast.LENGTH_LONG).show();
+
+                }else {
+                    Toast.makeText(GoodsDetailsActivity.this,"收藏失败！", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+    }
+
+    //商品描述
+    private void setValueWebView(String html){
+        //添加css让图片自适应组件
+        html="<style>img{max-width:100%;height:auto}" +
+                "video{max-width:100%;height:auto}</style>"+html;
+
+        webView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
+        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setJavaScriptEnabled(true);//允许执行js
     }
 }
