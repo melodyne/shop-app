@@ -134,7 +134,7 @@ public class AdapterShopcar extends BaseAdapter {
 
         Log.e("hhhhhh", listItems + "");
         //初始化总价
-        String aaa = (String) listItems.get(position).get("total");//id
+        String aaa = (String) listItems.get(position).get("total");
         aaa=aaa.replace("￥", "");
         double tol1=Double.parseDouble(aaa);
         if (tolMoney==null){
@@ -162,7 +162,9 @@ public class AdapterShopcar extends BaseAdapter {
 
                 HashMap<String ,String > map=new HashMap<String ,String>();
                 map.put("key", cart_id);
+                //删除购物车
 
+//                网络请求
                 final YunsuHttp  yunsuHttp=new YunsuHttp(mContent);
                 yunsuHttp.doPost(url, map, new NetIntf() {
                     @Override
@@ -180,10 +182,20 @@ public class AdapterShopcar extends BaseAdapter {
                         }
                    }
                });
+                tolMoney=null;
+//                总价变更
+//                String total = (String) listItems.get(position).get("price");
+//                int i=Integer.parseInt(numTV.getText().toString());
+//                String  aaa=total.replace("￥", "");
+//                double tol1=Double.parseDouble(aaa);
+//                String b =tolTv.getText().toString();
+//                double tol2=Double.parseDouble(b);
+//                double tol3=tol2-tol1*i;
+//                tolTv.setText("" + tol3);
 
             }
         });
-
+        //增加数量
         holder.addbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,10 +212,10 @@ public class AdapterShopcar extends BaseAdapter {
 
             }
         });
+        //减少数量
         holder.decbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int i=Integer.parseInt(numTV.getText().toString());
                 //判断不能小于0
                 if (i>0) {

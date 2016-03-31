@@ -13,15 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yunsu.chen.GoodsActivity;
 import com.yunsu.chen.GoodsDetailsActivity;
+import com.yunsu.chen.handler.YunsuHttp;
+import com.yunsu.chen.interf.NetIntf;
 import com.yunsu.chen.slide.ImageLoaderUtil;
 import com.yunsu.chen.R;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +34,7 @@ public class AdapterCollect extends BaseAdapter {
     List<Map<String, Object>> listItems = null;
 
     String product_name;
-
+    private String url="index.php?route=moblie/account/wishlist";
     public AdapterCollect(Context context, List<Map<String, Object>> listItems) {
         this.mContent = context;
         this.listItems = listItems;
@@ -70,6 +74,7 @@ public class AdapterCollect extends BaseAdapter {
             holder.priceTV = (TextView) view.findViewById(R.id.tv_collect_price);
             holder.lanmuTV=(TextView)view.findViewById(R.id.tv_collect_lanmu);
             holder.imgIV = (ImageView) view.findViewById(R.id.iv_collect_img);
+            holder.decTV=(Button)view.findViewById(R.id.test);
 
             view.setTag(holder);
         } else {
@@ -77,7 +82,7 @@ public class AdapterCollect extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-
+        Log.e("map", listItems + "");
         product_name = (String) listItems.get(position).get("name");
         String product_desc = (String) listItems.get(position).get("type");
         String product_price = (String) listItems.get(position).get("price");
@@ -96,14 +101,38 @@ public class AdapterCollect extends BaseAdapter {
                 String product_id = (String) listItems.get(position).get("product_id");//id
                 Intent intent = new Intent();
                 intent.putExtra("product_id", product_id);
-                intent.putExtra("title",mContent.getString(R.string.mycollect));
-                Toast.makeText(mContent,product_id+"",Toast.LENGTH_LONG).show();
+                intent.putExtra("title", mContent.getString(R.string.mycollect));
+                Toast.makeText(mContent, product_id + "", Toast.LENGTH_LONG).show();
                 intent.setClass(mContent, GoodsDetailsActivity.class);
                 mContent.startActivity(intent);
 
             }
         });
 
+        holder.decTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String remove = (String) listItems.get(position).get("product_id");
+
+
+                //删除收藏
+
+//                网络请求
+                final YunsuHttp yunsuHttp=new YunsuHttp(mContent);
+               url="index.php?route=moblie/account/wishlist&amp;"+"remove="+remove;
+                yunsuHttp.doGet(url, new NetIntf() {
+                    @Override
+                    public void getNetMsg() {
+                        String httpJson = yunsuHttp.getJsonString();
+                        System.out.println("删除收藏>>>>>>>" + httpJson);
+//                        Log.e("collect", httpJson);
+                        //更新ListVie
+                        listItems.remove(position);
+                        notifyDataSetChanged();//通知ListView数据有更新
+                    }
+                });
+            }
+        });
 
         try {
             // 加载网络图片
@@ -119,6 +148,7 @@ public class AdapterCollect extends BaseAdapter {
     class ViewHolder {
         TextView pnameTV, describeTV, priceTV,lanmuTV;
         ImageView imgIV;
+        Button decTV;
     }
 }
 

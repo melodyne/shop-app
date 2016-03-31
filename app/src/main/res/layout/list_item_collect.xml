@@ -84,6 +84,16 @@
                     android:text="乡村景点"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
+                <Button
+                    android:id="@+id/test"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@color/yellow_f80"
+                    android:text="@string/delete"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
         </LinearLayout>
