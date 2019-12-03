@@ -7,3 +7,6 @@
 
 ### 开发工具
 Android Studio
+
+### 开发语言
+Java
