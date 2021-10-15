@@ -12,6 +12,6 @@ Android Studio
 Java
 
 ### 效果截图
-![13278239239736362](https://github.com/melodyne/shop-app/blob/master/1477878574.jpg?raw=true)
-![13278239271859784](https://github.com/melodyne/shop-app/blob/master/2374876241.jpg?raw=true)
-![13278239271859785](https://github.com/melodyne/shop-app/blob/master/5428763228.jpg?raw=true)
+![](https://github.com/melodyne/shop-app/blob/master/1477878574.jpg?raw=true =200)
+![](https://github.com/melodyne/shop-app/blob/master/2374876241.jpg?raw=true =200)
+![](https://github.com/melodyne/shop-app/blob/master/5428763228.jpg?raw=true =200)
